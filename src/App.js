@@ -1,10 +1,15 @@
-import {ItemListContainer} from './components/content/ItemListContainer/ItemListContainer'
+import GlobalPeliculasContext from './context/GlobalPeliculasContext';
+import { Rutas } from './routes/Rutas';
 
 
 function App() {
   return (
     <div className="App">
-      <ItemListContainer/>
+      <GlobalPeliculasContext>
+
+        <Rutas/>
+
+      </GlobalPeliculasContext>
     </div>
   );
 }
