@@ -3,8 +3,7 @@ import { GlobalContextPeliculas } from '../../../../context/GlobalPeliculasConte
 import { Item } from './Item/Item';
 
 export const ItemList = ({arrayPeliculas}) => {
-    console.log(arrayPeliculas);
-    const {urlImagenes}= useContext(GlobalContextPeliculas)
+    const {urlImagenes}= useContext(GlobalContextPeliculas);
    
 
   return (
