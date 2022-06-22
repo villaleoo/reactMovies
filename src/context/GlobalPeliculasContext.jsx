@@ -5,7 +5,6 @@ export const GlobalContextPeliculas = createContext('');
 
 export const GlobalPeliculasContext = ({children}) => {
     const [dataApi, setDataApi]= useState([]);
-    const [busquedaPelis, setBusquedaPelis]= useState([]);
     const [busqueda, setBusqueda]= useState('');
     
 
@@ -24,11 +23,11 @@ export const GlobalPeliculasContext = ({children}) => {
         try {
             const respuesta = await fetch (URL);
             const data = await respuesta.json();
-            setTimeout(() => {
+           
                 const {results} = data;
                 setDataApi(results);
                 
-            }, 2000);
+            
             
         } catch (error) {
             console.log(error);
@@ -39,28 +38,58 @@ export const GlobalPeliculasContext = ({children}) => {
     }
 
     async function obtenerPeliculasPorBusqueda (e){
-        e.preventDefault();
-        const urlBusquedaPeliculas= `https://api.themoviedb.org/3/search/movie?api_key=28bd1c085c3b143b58f3929377d14de7&language=es-AR&page=1&query=${busqueda}`;
-        try {
-            const respuesta = await fetch (urlBusquedaPeliculas);
-            const data = await respuesta.json();
-            const {Search} = data ;
-            console.log(data);
-            setBusquedaPelis(Search);
-        } catch (error) {
-            console.log(error);
-        }
+        e.preventDefault()
+            if (busqueda === '') {
+                obtenerPeliculasPopulares()
+            }
+            const urlBusquedaPeliculas= `https://api.themoviedb.org/3/search/movie?api_key=28bd1c085c3b143b58f3929377d14de7&language=es-AR&page=1&query=${busqueda}`;
+            try {
+                const respuesta = await fetch (urlBusquedaPeliculas);
+                const data = await respuesta.json();
+                const {results} = data ;
+                if (results) {
+                    setDataApi(results);
+                }
+                
+            } catch (error) {
+                console.log(error);
+                
+            }
+        
       }
 
     function handleChange (e){
-        setBusqueda(e.target.value);
+        setBusqueda((e.target.value));
+      }
+
+const [checkValue, setCheckValue]= useState(true);
+const [filtradoPorValoracion, setFiltradoPorValoracion]= useState([]);
+
+// let pruebita= dataApi.filter(peli => (parseInt(peli.vote_average) > numeroMin ) && (parseInt(peli.vote_average)<= numeroMax));
+
+
+function handleFiltrarPorValoracion (numeroMin,numeroMax){
+   
+   
+    // let pruebita= peliculas.filter(peli => (parseInt(peli.vote_average) > numeroMin ) && (parseInt(peli.vote_average)<= numeroMax));
+        if(checkValue == true){
+          console.log(checkValue, "es el valor");
+          
+        }else{
+          console.log(checkValue, 'este es el valor');
+          
+        }
+        setCheckValue(!checkValue)
       }
     
+  
+    
+  
 
    
 
   return (
-    <GlobalContextPeliculas.Provider value={{dataApi,obtenerPeliculasPopulares,urlImagenes,obtenerPeliculasPorBusqueda, handleChange}}>
+    <GlobalContextPeliculas.Provider value={{dataApi,obtenerPeliculasPopulares,urlImagenes,obtenerPeliculasPorBusqueda,handleChange,checkValue,filtradoPorValoracion,handleFiltrarPorValoracion}}>
         {children}
     </GlobalContextPeliculas.Provider>
   )

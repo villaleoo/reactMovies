@@ -10,6 +10,7 @@ export const Rutas = () => {
         <Routes>
             <Route>
                 <Route index element={<ItemListContainer/>}/>
+                <Route path='/valoracion/:min/:max' element={<ItemListContainer/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

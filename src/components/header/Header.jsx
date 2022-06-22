@@ -4,8 +4,8 @@ import { GlobalContextPeliculas } from '../../context/GlobalPeliculasContext';
 export const Header = () => {
 
   const {obtenerPeliculasPorBusqueda,handleChange}= useContext(GlobalContextPeliculas);
+ 
   
-
   return (
     <div>
         <nav className="navbar navbar-dark bg-dark">
@@ -14,7 +14,7 @@ export const Header = () => {
               <input
               className="form-control mr-sm-2"
               type="search"
-              placeholder="Search"
+              placeholder="Buscar titulos..."
               aria-label="Search"
               onChange={handleChange}
               />
