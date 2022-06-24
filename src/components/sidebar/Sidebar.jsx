@@ -8,8 +8,8 @@ const {ratings, handleCheckbox}= useContext(GlobalContextPeliculas)
 
 
   return (
-    <div className='w-25'>
-      <div className='tituloFiltro'>
+    <div className='contenedorSidebar w-25'>
+      <div className='tituloFiltro pl-2'>
         <h4>Filtrar por valoracion</h4>
       </div>
       <div className= "d-flex justify-content-center align-items-center">

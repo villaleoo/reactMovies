@@ -7,7 +7,7 @@ export const ItemList = ({arrayPeliculas}) => {
    
 
   return (
-    <div className='bg-warning w-100 d-flex flex-wrap justify-content'>
+    <div className=' w-100 d-flex flex-wrap justify-content-around'>
         {
             arrayPeliculas.length>0 ? (
                 arrayPeliculas.map((item,index)=>(
@@ -15,7 +15,7 @@ export const ItemList = ({arrayPeliculas}) => {
                         <Item
                         id={item.id}
                         titulo={item.title}
-                        descripcion={item.overview}
+                        valoracion={item.vote_average}
                         imagenPrincipal={`${urlImagenes}${item.poster_path}`}
                         />
                     </div>

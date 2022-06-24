@@ -1,23 +1,42 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { GlobalContextPeliculas } from '../../../../context/GlobalPeliculasContext';
 import {Link} from 'react-router-dom'
+import './itemDetail.scss'
 
 export const ItemDetail = ({pelicula}) => {
     const {urlImagenes}= useContext(GlobalContextPeliculas);
+    
+  
+
+  let imagenFondo={
+    background:`url(${urlImagenes}${pelicula.backdrop_path})`,
+    backgroundPosition:'center',
+  }
+ 
   return (
-    <div className='w-100 bg-danger h-100'>
-        <div>
-            <Link to='/' className='btn btn-info'>Volver a inicio</Link>
-        </div>
-        <div>
-            <h1>{pelicula.title}</h1>
-            <h4>{pelicula.original_title}</h4>
-            <img src={`${urlImagenes}${pelicula.poster_path}`} alt="peli-img" />
-            <p>{pelicula.overview}</p>
-            <p>valoracion: {pelicula.vote_average}</p>
-            <p>Lanzamiento: {pelicula.release_date}</p>
-            <img src={`${urlImagenes}${pelicula.backdrop_path}`} alt="peli-img-secundaria" />
-        </div>
+    <div className='w-100 vh-100 d-flex align-items-center justify-content-center'>
+        <Link to='/' className='btn btn-outline-danger botonInicio'>Regresar al menú↩</Link>
+        
+        <div className="movie-card w-100">
+          <div className="containerDetail w-75">
+              <img src={`${urlImagenes}${pelicula.poster_path}`} alt="peli-img" className='cover'/>
+            <div className="hero" style={imagenFondo}>
+              <div className="details">
+                <h2 className="title1">{pelicula.title}</h2>
+                <h5 className="title2">{pelicula.original_title}</h5>    
+              </div> 
+            </div> 
+            <div className="description">
+              <div className="column1">
+                <span className="tag">Valoracion: {pelicula.vote_average}</span>
+                <span className="tag">Lanzamiento: {pelicula.release_date}</span>
+              </div> 
+              <div className="column2">
+                <p>{pelicula.overview}</p>
+              </div> 
+            </div> 
+          </div> 
+        </div> 
     </div>
   )
 }

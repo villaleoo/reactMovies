@@ -2,22 +2,25 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './item.scss'
 
-export const Item = ({id,titulo,descripcion,imagenPrincipal}) => {
+export const Item = ({id,titulo,valoracion,imagenPrincipal}) => {
  
   
   return (
     <>
-        <div class="container m-1">
-          <div class="cardcontainer">
-              <div class="photo">
+        <div className="container m-1">
+          <div className="cardcontainer">
+              <div className="photo">
                   <img src={imagenPrincipal} alt='portada'/>
-                  <div class="photos">Pelicula</div>
+                  <div className="photos">Pelicula</div>
               </div>
-              <div class="content">
-                  <p class="txt4 text-center w-100">{titulo}</p>
+              <div className="content">
+                  <p className="txt4 text-center w-100">{titulo}</p>
+                  <div>
+                    <p className='text-center pt-3 valoration'>Valoracion: {valoracion}</p>
+                  </div>
               </div>
-              <div class="footer d-flex justify-content-center">
-                  <Link to={`/pelicula/${id}`} className='btn btn-info'>ver mas</Link>
+              <div className="footer d-flex justify-content-center">
+                  <Link to={`/pelicula/${id}`} className='my-1 btn btn-outline-dark'>Mas detalles</Link>
               </div>
           </div>
         </div>
