@@ -6,14 +6,14 @@ export const GlobalContextPeliculas = createContext('');
 export const GlobalPeliculasContext = ({children}) => {
     const [dataApi, setDataApi]= useState([]);
     const [busqueda, setBusqueda]= useState('');
+    const [ratings, setRatings]= useState([false,false,false,false,false]);
+    const [masDetalles, setMasDetalles]= useState('');
     
-
     const URLBase= 'https://api.themoviedb.org/3';
     const apiKeyV3='28bd1c085c3b143b58f3929377d14de7';
-    const idiomaEsp= '&language=es-AR';
-    const urlImagenes=`https://image.tmdb.org/t/p/w500/`;
+    const idiomaEsp='&language=es-AR';
+    const urlImagenes=`https://image.tmdb.org/t/p/w300/`;
 
-    
     
     async function obtenerPeliculasPopulares (){
         const urlPopulares= '/movie/popular?api_key=';
@@ -23,18 +23,11 @@ export const GlobalPeliculasContext = ({children}) => {
         try {
             const respuesta = await fetch (URL);
             const data = await respuesta.json();
-           
-                const {results} = data;
-                setDataApi(results);
-                
-            
-            
+            const {results} = data;
+            setDataApi(results);
         } catch (error) {
             console.log(error);
-            
         }
-        
-        
     }
 
     async function obtenerPeliculasPorBusqueda (e){
@@ -57,39 +50,36 @@ export const GlobalPeliculasContext = ({children}) => {
             }
         
       }
+    async function obtenerMasInformacion(id) {
+        setMasDetalles('')
+        const urlMasDetalles= `${URLBase}/movie/${id}?api_key=${apiKeyV3}&language=es-ES`
+        try {
+            const respuesta = await fetch(urlMasDetalles);
+            const data = await respuesta.json();
+            setTimeout(() => {
+                setMasDetalles(data);
+            }, 2000);
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
 
     function handleChange (e){
         setBusqueda((e.target.value));
       }
 
-const [checkValue, setCheckValue]= useState(true);
-const [filtradoPorValoracion, setFiltradoPorValoracion]= useState([]);
+    function handleCheckbox(e) {
+      const value = e.target.value;
+      const nuevoRating= [...ratings];
+      nuevoRating[value]= !nuevoRating[value];
+      setRatings(nuevoRating)
 
-// let pruebita= dataApi.filter(peli => (parseInt(peli.vote_average) > numeroMin ) && (parseInt(peli.vote_average)<= numeroMax));
+    }
 
-
-function handleFiltrarPorValoracion (numeroMin,numeroMax){
-   
-   
-    // let pruebita= peliculas.filter(peli => (parseInt(peli.vote_average) > numeroMin ) && (parseInt(peli.vote_average)<= numeroMax));
-        if(checkValue == true){
-          console.log(checkValue, "es el valor");
-          
-        }else{
-          console.log(checkValue, 'este es el valor');
-          
-        }
-        setCheckValue(!checkValue)
-      }
-    
-  
-    
-  
-
-   
 
   return (
-    <GlobalContextPeliculas.Provider value={{dataApi,obtenerPeliculasPopulares,urlImagenes,obtenerPeliculasPorBusqueda,handleChange,checkValue,filtradoPorValoracion,handleFiltrarPorValoracion}}>
+    <GlobalContextPeliculas.Provider value={{dataApi,obtenerPeliculasPopulares,urlImagenes,obtenerPeliculasPorBusqueda,handleChange,ratings,handleCheckbox,obtenerMasInformacion,masDetalles}}>
         {children}
     </GlobalContextPeliculas.Provider>
   )

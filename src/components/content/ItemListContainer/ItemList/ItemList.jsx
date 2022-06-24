@@ -7,7 +7,7 @@ export const ItemList = ({arrayPeliculas}) => {
    
 
   return (
-    <div className='bg-warning w-100'>
+    <div className='bg-warning w-100 d-flex flex-wrap justify-content'>
         {
             arrayPeliculas.length>0 ? (
                 arrayPeliculas.map((item,index)=>(

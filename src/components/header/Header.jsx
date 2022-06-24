@@ -1,16 +1,21 @@
 import React, { useContext, useState } from 'react'
 import { GlobalContextPeliculas } from '../../context/GlobalPeliculasContext';
+import {Link} from 'react-router-dom'
 
 export const Header = () => {
 
   const {obtenerPeliculasPorBusqueda,handleChange}= useContext(GlobalContextPeliculas);
  
+  let logo={
+    width:'80px',
+    heigth:'80px'
+  }
   
   return (
     <div>
         <nav className="navbar navbar-dark bg-dark">
-            <a className="navbar-brand">Navbar</a>
-            <form className="form-inline" onSubmit={obtenerPeliculasPorBusqueda}>
+            <Link to='/' className="navbar-brand"><img src="https://i.pinimg.com/originals/3e/dc/22/3edc22756408dbcf3ac895b54d527fc4.png" style={logo} alt="logo"/></Link>
+            <form className="form-inline " onSubmit={obtenerPeliculasPorBusqueda}>
               <input
               className="form-control mr-sm-2"
               type="search"
