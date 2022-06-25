@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { GlobalContextPeliculas } from '../../../../context/GlobalPeliculasContext';
+import { Spinner } from '../../../spinner/Spinner';
 import { Item } from './Item/Item';
 
 export const ItemList = ({arrayPeliculas}) => {
     const {urlImagenes}= useContext(GlobalContextPeliculas);
    
-
   return (
     <div className=' w-100 d-flex flex-wrap justify-content-around'>
         {
@@ -20,10 +20,10 @@ export const ItemList = ({arrayPeliculas}) => {
                         />
                     </div>
                 ))
-            ):
-            <h2>cargandoooooooo</h2>
+            )
+            :
+            <Spinner/>
         }
-
     </div>
   )
 }

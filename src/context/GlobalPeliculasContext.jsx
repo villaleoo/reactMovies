@@ -9,7 +9,6 @@ export const GlobalPeliculasContext = ({children}) => {
     const [ratings, setRatings]= useState([false,false,false,false,false]);
     const [masDetalles, setMasDetalles]= useState('');
 
-    
     const URLBase= 'https://api.themoviedb.org/3';
     const apiKeyV3='28bd1c085c3b143b58f3929377d14de7';
     const idiomaEsp='&language=es-AR';
@@ -20,7 +19,6 @@ export const GlobalPeliculasContext = ({children}) => {
         const urlPopulares= '/movie/popular?api_key=';
         const urlDiscover= '/discover/movie?api_key=';
         const URL = `${URLBase}${urlPopulares}${apiKeyV3}${idiomaEsp}`;
-
         try {
             const respuesta = await fetch (URL);
             const data = await respuesta.json();
@@ -49,8 +47,8 @@ export const GlobalPeliculasContext = ({children}) => {
                 console.log(error);
                 
             }
-        
       }
+      
     async function obtenerMasInformacion(id) {
         setMasDetalles('')
         const urlMasDetalles= `${URLBase}/movie/${id}?api_key=${apiKeyV3}&language=es-ES`
@@ -80,7 +78,18 @@ export const GlobalPeliculasContext = ({children}) => {
 
 
   return (
-    <GlobalContextPeliculas.Provider value={{dataApi,obtenerPeliculasPopulares,urlImagenes,obtenerPeliculasPorBusqueda,handleChange,ratings,handleCheckbox,obtenerMasInformacion,masDetalles}}>
+    <GlobalContextPeliculas.Provider 
+    value={{
+    dataApi,
+    obtenerPeliculasPopulares,
+    urlImagenes,
+    obtenerPeliculasPorBusqueda,
+    handleChange,
+    ratings,
+    handleCheckbox,
+    obtenerMasInformacion,
+    masDetalles
+    }}>
         {children}
     </GlobalContextPeliculas.Provider>
   )

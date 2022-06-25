@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { GlobalContextPeliculas } from '../../context/GlobalPeliculasContext'
-import './sidebar.scss'
-
+import React, { useContext } from 'react';
+import { GlobalContextPeliculas } from '../../context/GlobalPeliculasContext';
+import './sidebar.scss';
 
 export const Sidebar = () => {
-const {ratings, handleCheckbox}= useContext(GlobalContextPeliculas)
-
+const {ratings, handleCheckbox}= useContext(GlobalContextPeliculas);
 
   return (
     <div className='contenedorSidebar w-25'>
@@ -24,11 +22,7 @@ const {ratings, handleCheckbox}= useContext(GlobalContextPeliculas)
             ))
           }
         </div>
-
-        
-       
       </div>
-  
     </div>
   )
 }

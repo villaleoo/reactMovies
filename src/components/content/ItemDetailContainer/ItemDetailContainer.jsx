@@ -16,12 +16,14 @@ export const ItemDetailContainer = () => {
 
   return (
     <div className='w-100 vh-100 d-flex justify-content-center align-items-center'>
-    
        { masDetalles !== '' ? 
+
         <ItemDetail
         pelicula={masDetalles}/>
+
         :
         <Spinner/>
+
        }
     </div>
   )

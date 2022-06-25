@@ -4,7 +4,6 @@ import './item.scss'
 
 export const Item = ({id,titulo,valoracion,imagenPrincipal}) => {
  
-  
   return (
     <>
         <div className="container m-1">

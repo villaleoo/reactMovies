@@ -1,15 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react';
 import { GlobalContextPeliculas } from '../../context/GlobalPeliculasContext';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 export const Header = () => {
-
   const {obtenerPeliculasPorBusqueda,handleChange}= useContext(GlobalContextPeliculas);
  
   let logo={
     width:'80px',
     heigth:'80px'
-  }
+  };
   
   return (
     <div>
@@ -23,8 +22,7 @@ export const Header = () => {
               aria-label="Search"
               onChange={handleChange}
               />
-              <button
-              className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
         </nav>
     </div>

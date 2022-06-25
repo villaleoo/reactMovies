@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect} from 'react'
 import { GlobalContextPeliculas } from '../../../context/GlobalPeliculasContext';
 import { Header } from '../../header/Header';
 import { Sidebar } from '../../sidebar/Sidebar';
-import './layout.scss'
-
 import { ItemList } from './ItemList/ItemList';
+import './layout.scss'
 
 export const ItemListContainer = () => {
     const {obtenerPeliculasPopulares,dataApi,ratings}= useContext(GlobalContextPeliculas);
@@ -53,7 +52,6 @@ export const ItemListContainer = () => {
               />
             }
         </div>
-        
     </div>
   )
 }

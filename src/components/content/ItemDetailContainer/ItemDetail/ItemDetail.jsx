@@ -4,19 +4,17 @@ import {Link} from 'react-router-dom'
 import './itemDetail.scss'
 
 export const ItemDetail = ({pelicula}) => {
-    const {urlImagenes}= useContext(GlobalContextPeliculas);
-    
+  const {urlImagenes}= useContext(GlobalContextPeliculas);
   
-
   let imagenFondo={
     background:`url(${urlImagenes}${pelicula.backdrop_path})`,
     backgroundPosition:'center',
+    //aqui no utilizo 'background-size:cover' por el hecho de que la imagen backdrop_path es muy pequeña y se pixelea
   }
  
   return (
     <div className='w-100 vh-100 d-flex align-items-center justify-content-center'>
         <Link to='/' className='btn btn-outline-danger botonInicio'>Regresar al menú↩</Link>
-        
         <div className="movie-card w-100">
           <div className="containerDetail w-75">
               <img src={`${urlImagenes}${pelicula.poster_path}`} alt="peli-img" className='cover'/>

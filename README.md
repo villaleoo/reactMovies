@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+                /////Navegacion entre componentes/////
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SRC
+***************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+                                        ////COMPONENTES////
 
-## Available Scripts
+Incluye 4 carpetas: content, header, sidebar y spinner:
 
-In the project directory, you can run:
+componentes> content:
 
-### `npm start`
+	Incluye 2 carpetas que actuan como contenedores del sitio (ItemListContainer, ItemDetailContainer)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    1)
+	>ItemListContainer.jsx: es el index (raiz) del sitio, contiene un useEffect el cual llama a la funcion que conecta con las peliculas populares de la API utilizada. Ademas, filtra las peliculas a través de la recepcion de un estado el cual modifica el Sidebar.jsx.
+				Se encarga de pasar mediante props a ItemList el arreglo de peliculas filtradas(ya sea por busqueda o por filtro de valoracion).
+	>(hijo) ItemList.jsx: Recibe por props el arreglo de peliculas y mapea cada elemento del arreglo a traves de su hijo Item.jsx el cual recibe por props propiedades de cada uno de esos elementos.
+	>(hijo) Item.jsx: Es una card que transforma cada objeto del arreglo de peliculas en una card visible para el usuario.Ademas cuenta con un boton que asocia el id de c/u de las peliculas y asi permite ver mas detalles del objeto (pelicula) seleccionado.	
+   
+    2)
+	>ItemDetailContainer.jsx: es el contenedor de la vista detallada de cada una de las peliculas seleccionadas por el usuario. Contiene un useEffect el cual llama a la funcion que conecta con la peticion de obtener mas detalles de una pelicula en particular.
+				Para identificar la pelicula seleccionada se le pasa a la funcion el id de la pelicula (id que itemDetailContainer obtiene mediante el hook useParams de react-router-dom (biblioteca), el cual lo captura gracias al componente Rutas.jsx y al boton del Item.jsx).
+				Luego de obtener la pelicula, la funcion la guarda en un estado. itemDetailContainer recibe ese estado mediante el hook useContext y se lo pasa por props a su hijo ItemDetail.jsx .(para no generar una mala vista en la carga de peticiones a la API se agrego un componente Spinner).
+	>(hijo) ItemDetail.jsx: Es el encargado de 'desglosar' ese objeto que recibe de su padre y muestra cada propiedad en una card con todos los detalles de la pelicula seleccionada.
+****************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+componentes>header:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+	Incluye un archivo Header.jsx quien es el contenedor de la barra de busqueda y del logo del sitio.
 
-### `npm test`
+	>Header.jsx: obtiene del hook useContext una funcion(funcion 1) para recoger lo que el usuario escribe en la barra de busqueda y una funcion (funcion 2) que busca peliculas acorde a lo que el usuario escribe en la barra de busqueda.
+		     Lo que la funcion 2 busca lo guarda en un estado, estado que (pasos mediante) sera recogido por ItemList para mostrar las peliculas que se encontraron acorde a lo que el usuario tipeo en la barra de busqueda y recogió la funcion 1.
+*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+componentes>sidebar:
+	
+	Incluye un archivo Sidebar.jsx quien es el contenedor de los filtros que recaen sobre las peliculas (en este caso solo filtrado por valoracion) y un archivo sidebar.scss que le da estilos al anterior.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+	>Sidebar.jsx: recoge de useContext un estado de formato array con 5 elementos, (son 5 porque la maxima valoracion es de 5 estrellas).Este lo que hace es cambiar el valor de c/u de esos elementos del estado alternando entre verdadero y falso. Valores que serviran para que el componente ItemListContainer aplique filtros a quienes encuentre como verdaderos(true).
+******************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+componentes>spinner:
+	
+	Incluye un archivo Spinner.jsx y spinner.scss.
 
-### `npm run build`
+	>Spinner.jsx: se llama a este componente segun convenga cuando se ejecutan peticiones a la API con el fin de que se muestre este componente en pantalla el tiempo que demore en dar una respuesta la API.
+******************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+ 				////CONTEXT////
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Incluye un archivo GlobalPeliculasContext.jsx que contiene funciones de peticion a la API, funciones de eventos y estados de utilidad para los componentes.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+>GlobalPeliculasContext.jsx actua como proveedor de estados y funciones a los componentes y es el componente que se comunica con la API.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+			     ////ROUTES////
 
-### `npm run eject`
+Incluye un archivo Rutas.jsx quien es el que permite "moverse" en el layout de un componente a otro, modificando la url del sitio. (aportado por biblioteca react-router-dom).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+********************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+///App.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Archivo donde recaen todos los componentes del SRC. En este caso compuesto por los componentes GlobalPeliculasContext, proveedor de los componentes y dentro de el Rutas.jsx que contiene el ruteo de todo el sitio.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+	///BIBLIOTECAS UTILIZADAS///
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+'React-router-dom' para la navegacion entre componentes.
 
-## Learn More
+Sass como preprocesador de css .
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+	
+		    
