@@ -14,17 +14,19 @@
     font: 14px/22px "Lato", Arial, sans-serif;
     color: #A9A8A3;
     padding: 40px 0;
+   
   }
 
   .containerDetail {
     margin: 0 auto;
-    width: 780px;
+    width: 10%;
     height: 640px;
     background: #F0F0ED;
     border-radius: 5px;
     position: relative;
     display: flex;
     flex-direction: column;
+    background-color: yellow;
   }
 
   .hero {
@@ -62,11 +64,12 @@
     position: absolute;
     bottom: 0px;
     right: 0px;
+    left: 35%;
   }
 
     .title1 {
       color: white;
-      font-size: 44px;
+      font-size: 20px;
       margin-bottom: 13px;
       background-color: rgba(0, 0, 0, 0.507);
       position: relative;
@@ -78,7 +81,7 @@
 
     .title2 {
       color: #C7C1BA;
-      font-size: 23px;
+      font-size: 15px;
       font-weight: 300;
       margin-bottom: 15px;
       background-color: rgba(0, 0, 0, 0.507);
@@ -87,7 +90,7 @@
     }
 
   .description {
-    width: 70%;
+    width:65%;
     height: 50%;
     align-self: flex-end;
     font-size: 16px;
