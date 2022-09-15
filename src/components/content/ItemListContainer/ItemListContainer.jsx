@@ -1,4 +1,5 @@
 import React, { useContext, useEffect} from 'react'
+import { useState } from 'react';
 import { GlobalContextPeliculas } from '../../../context/GlobalPeliculasContext';
 import { Header } from '../../header/Header';
 import { Sidebar } from '../../sidebar/Sidebar';
@@ -7,26 +8,32 @@ import './layout.scss'
 
 export const ItemListContainer = () => {
     const {obtenerPeliculasPopulares,dataApi,ratings}= useContext(GlobalContextPeliculas);
+    
 
-    let indexOfRating=ratings.indexOf(true);
+    
+    let obtenerIndex= ratings.indexOf(true)
+      
 
     let filtrado = dataApi.filter(filtrar => {
-      if (indexOfRating === 0 ) {
-        return (parseInt(filtrar.vote_average) > 8 ) && (parseInt(filtrar.vote_average)<= 10);
+      if (obtenerIndex === 0 ) {
+        return (filtrar.vote_average > 8)
       }
-      if (indexOfRating === 1) {
-        return (parseInt(filtrar.vote_average) > 6 ) && (parseInt(filtrar.vote_average)<= 8);
+      if (obtenerIndex === 1) {
+        return ((filtrar.vote_average <= 8) && (filtrar.vote_average > 6) )
       }
-      if (indexOfRating === 2) {
-        return (parseInt(filtrar.vote_average) > 4 ) && (parseInt(filtrar.vote_average)<= 6);
+      if (obtenerIndex === 2) {
+        return ((filtrar.vote_average <= 6) && (filtrar.vote_average > 4))
       }
-      if (indexOfRating === 3) {
-        return (parseInt(filtrar.vote_average) > 2 ) && (parseInt(filtrar.vote_average)<= 4);
+      if (obtenerIndex === 3) {
+        return ((filtrar.vote_average <= 4 )&& (filtrar.vote_average > 3));
       }
-      if (indexOfRating === 4) {
-        return (parseInt(filtrar.vote_average) > 0 ) && (parseInt(filtrar.vote_average)<= 2);
+      if (obtenerIndex === 4) {
+        return (filtrar.vote_average <= 3 ) ;
       }
+      
     })
+    
+   
     
     useEffect(() => {
       

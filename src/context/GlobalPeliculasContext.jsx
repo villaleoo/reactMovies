@@ -47,6 +47,7 @@ export const GlobalPeliculasContext = ({children}) => {
                 console.log(error);
                 
             }
+            setBusqueda('');
       }
       
     async function obtenerMasInformacion(id) {
@@ -68,8 +69,11 @@ export const GlobalPeliculasContext = ({children}) => {
         setBusqueda((e.target.value));
       }
 
+    
+
     function handleCheckbox(e) {
       const value = e.target.value;
+    
       const nuevoRating= [...ratings];
       nuevoRating[value]= !nuevoRating[value];
       setRatings(nuevoRating)
@@ -85,6 +89,7 @@ export const GlobalPeliculasContext = ({children}) => {
     urlImagenes,
     obtenerPeliculasPorBusqueda,
     handleChange,
+    busqueda,
     ratings,
     handleCheckbox,
     obtenerMasInformacion,
